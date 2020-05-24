@@ -138,9 +138,6 @@ type paymentSession struct {
 	// specified in the payment is one, under no circumstances splitting
 	// will happen and this value remains unused.
 	minShardAmt lnwire.MilliSatoshi
-
-	// log is a payment session-specific logger.
-	log btclog.Logger
 }
 
 // newPaymentSession instantiates a new payment session.
