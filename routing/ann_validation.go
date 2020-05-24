@@ -140,24 +140,9 @@ func ValidateChannelUpdateAnn(pubKey *btcec.PublicKey, capacity btcutil.Amount,
 // signed by the party with the given node public key.
 func VerifyChannelUpdateSignature(msg *lnwire.ChannelUpdate,
 	pubKey *btcec.PublicKey) error {
-
-	data, err := msg.DataToSign()
-	if err != nil {
-		return fmt.Errorf("unable to reconstruct message data: %v", err)
+	verify_result = verify_signature() //mitä tonne pitäis laittaa?. Ja ton funktion pitää logata kans jos errori on? Tai sit se tehään täs funktios?
+	return verify_result
 	}
-	dataHash := chainhash.DoubleHashB(data)
-
-	nodeSig, err := msg.Signature.ToSignature()
-	if err != nil {
-		return err
-	}
-
-	if !nodeSig.Verify(dataHash, pubKey) {
-		return fmt.Errorf("invalid signature for channel update %v",
-			spew.Sdump(msg))
-	}
-
-	return nil
 }
 
 // validateOptionalFields validates a channel update's message flags and
